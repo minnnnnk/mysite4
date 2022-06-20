@@ -1,11 +1,26 @@
 package com.javaex.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.javaex.dao.UserDao;
+import com.javaex.vo.UserVo;
 
 @Service
 public class UserService {
 	
-	private 
+	@Autowired
+	private UserDao userDao;
+	
+	public int join(UserVo userVo) {
+		System.out.println("UserService > join");
+		
+		int count = userDao.userJoin(userVo);
+		
+		System.out.println(userVo);
+		
+		return count;
+	}
 	
 	
 }

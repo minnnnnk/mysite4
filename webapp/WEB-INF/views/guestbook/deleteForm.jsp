@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,7 +69,7 @@
 				<!-- //content-head -->
 
 				<div id="guestbook">
-					<form action="" method="">
+					<form action="/mysite4/guestBook/Delete" method="post">
 						<table id="guestDelete">
 							<colgroup>
 								<col style="width: 10%;">
@@ -78,12 +79,13 @@
 							</colgroup>
 							<tr>
 								<td>비밀번호</td>
-								<td><input type="password" name="pass"></td>
+								<td><input type="password" name="password"></td>
 								<td class="text-left"><button type="submit">삭제</button></td>
-								<td><a href="/guestbook2/gbc">[메인으로 돌아가기]</a></td>
+								<td><a href="/mysite4/guestBook/List">[메인으로 돌아가기]</a></td>
 							</tr>
 						</table>
-						<input type='hidden' name="" value=""> <input type='hidden' name="" value="">
+						<input type='hidden' name="no" value="${gVo.no} ">
+						<input type='hidden' name="" value="">
 					</form>
 
 				</div>
