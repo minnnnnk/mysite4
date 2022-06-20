@@ -22,5 +22,25 @@ public class UserService {
 		return count;
 	}
 	
+	public UserVo login(UserVo userVo) {
+		System.out.println("UserService > login");
+		UserVo uVo = userDao.loginUser(userVo);
+		return uVo;
+	}
 	
+	public UserVo getUser(int no) {
+		System.out.println("UserService > getUser");
+		
+		UserVo uVo = userDao.getUser(no);
+		
+		return uVo;
+	}
+	
+	public int userUpdate(UserVo userVo) {
+		System.out.println("UserService > userUpdate");
+		
+		int count = userDao.userUpdate(userVo);
+		System.out.println(count + "건 변경되었습니다");
+		return count;
+	}
 }
