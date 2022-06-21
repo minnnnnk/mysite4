@@ -83,12 +83,12 @@ public class UserController {
 	}
 	//회원수정
 	@RequestMapping(value="/modifyForm", method= {RequestMethod.GET,RequestMethod.POST})
-	public String modifyForm(@RequestParam("no") int no, HttpSession session) {
+	public String modifyForm(@RequestParam("no") int no, Model model) {
 		System.out.println("UserController>modifyForm");
 		
 		UserVo getUser = userSerivce.getUser(no);
 		
-		session.setAttribute("getUser", getUser);
+		model.addAttribute("getUser", getUser);
 		
 		return "/user/modifyForm";
 	}
