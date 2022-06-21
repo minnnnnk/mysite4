@@ -5,8 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="/mysite4/assets/css/mysite.css" rel="stylesheet" type="text/css">
-<link href="/mysite4/assets/css/user.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/user.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -14,18 +14,7 @@
 	<div id="wrap">
 
 		<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
-		<!-- //header -->
-
-		<div id="nav">
-			<ul class="clearfix">
-				<li><a href="">입사지원서</a></li>
-				<li><a href="">게시판</a></li>
-				<li><a href="">갤러리</a></li>
-				<li><a href="">방명록</a></li>
-			</ul>
-		</div>
-		<!-- //nav -->
-
+		<!-- //header +nav -->
 		<div id="container" class="clearfix">
 			<div id="aside">
 				<h2>회원</h2>
@@ -54,7 +43,7 @@
 	
 				<div id="user">
 					<div id="joinForm">
-						<form action="/mysite4/user/join" method="get">
+						<form action="${pageContext.request.contextPath}/user/join" method="get">
 	
 							<!-- 아이디 -->
 							<div class="form-group">

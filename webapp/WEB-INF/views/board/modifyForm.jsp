@@ -5,8 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="/mysite4/assets/css/mysite.css" rel="stylesheet" type="text/css">
-<link href="/mysite4/assets/css/board.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -15,24 +15,14 @@
 	<div id="wrap">
 
 		<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
-		<!-- //header -->
-
-		<div id="nav">
-			<ul class="clearfix">
-				<li><a href="">입사지원서</a></li>
-				<li><a href="">게시판</a></li>
-				<li><a href="">갤러리</a></li>
-				<li><a href="">방명록</a></li>
-			</ul>
-		</div>
-		<!-- //nav -->
+		<!-- //header +nav -->
 
 		<div id="container" class="clearfix">
 			<div id="aside">
 				<h2>게시판</h2>
 				<ul>
-					<li><a href="">일반게시판</a></li>
-					<li><a href="">댓글게시판</a></li>
+					<li><a href="${pageContext.request.contextPath}">일반게시판</a></li>
+					<li><a href="${pageContext.request.contextPath}">댓글게시판</a></li>
 				</ul>
 			</div>
 			<!-- //aside -->
@@ -54,7 +44,7 @@
 
 				<div id="board">
 					<div id="modifyForm">
-						<form action="#" method="get">
+						<form action="${pageContext.request.contextPath}" method="get">
 							<!-- 작성자 -->
 							<div class="form-group">
 								<span class="form-text">작성자</span> <span class="form-value">정우성</span>

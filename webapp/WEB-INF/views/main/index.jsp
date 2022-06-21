@@ -6,8 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="/mysite4/assets/css/mysite.css" rel="stylesheet" type="text/css">
-<link href="/mysite4/assets/css/main.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/main.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -16,17 +16,9 @@
 
 		<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
 
-		<!-- //header -->
+		<!-- //header + nav-->
 
-		<div id="nav">
-			<ul class="clearfix">
-				<li><a href="">입사지원서</a></li>
-				<li><a href="">게시판</a></li>
-				<li><a href="">갤러리</a></li>
-				<li><a href="/mysite4/guestBook/List">방명록</a></li>
-			</ul>
-		</div>
-		<!-- //nav -->
+		
 
 
 		<div id="container" class="clearfix">
@@ -36,7 +28,7 @@
 				<!-- content-head 없음 -->
 				<div id="index">
 
-					<img id="profile-img" src="/mysite4/assets/image/profile.jpg">
+					<img id="profile-img" src="${pageContext.request.contextPath}/assets/image/profile.jpg">
 
 					<div id="greetings">
 						<p class="text-xlarge">

@@ -6,8 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="/mysite4/assets/css/mysite.css" rel="stylesheet" type="text/css">
-<link href="/mysite4/assets/css/board.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -16,17 +16,9 @@
 	<div id="wrap">
 
 		<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
-		<!-- //header -->
+		<!-- //header +nav -->
 
-		<div id="nav">
-			<ul class="clearfix">
-				<li><a href="">입사지원서</a></li>
-				<li><a href="">게시판</a></li>
-				<li><a href="">갤러리</a></li>
-				<li><a href="">방명록</a></li>
-			</ul>
-		</div>
-		<!-- //nav -->
+		
 
 		<div id="container" class="clearfix">
 			<div id="aside">
@@ -55,7 +47,7 @@
 
 				<div id="board">
 					<div id="list">
-						<form action="" method="">
+						<form action="${pageContext.request.contextPath}" method="">
 							<div class="form-group text-right">
 								<input type="text">
 								<button type="submit" id=btn_search>검색</button>

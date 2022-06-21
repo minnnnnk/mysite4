@@ -8,8 +8,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link href="/mysite4/assets/css/mysite.css" rel="stylesheet" type="text/css">
-<link href="/mysite4/assets/css/guestbook.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/guestbook.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -17,17 +17,7 @@
 	<div id="wrap">
 
 		<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
-		<!-- //header -->
-
-		<div id="nav">
-			<ul class="clearfix">
-				<li><a href="">입사지원서</a></li>
-				<li><a href="">게시판</a></li>
-				<li><a href="">갤러리</a></li>
-				<li><a href="">방명록</a></li>
-			</ul>
-		</div>
-		<!-- //nav -->
+		<!-- //header +nav -->
 
 		<div id="container" class="clearfix">
 			<div id="aside">
@@ -54,7 +44,7 @@
 				<!-- //content-head -->
 
 				<div id="guestbook">
-					<form action="/mysite4/guestBook/add" method="get">
+					<form action="${pageContext.request.contextPath}/guestBook/add" method="get">
 						<table id="guestAdd">
 							<colgroup>
 								<col style="width: 70px;">
@@ -96,7 +86,7 @@
 							<td>${gList.no} </td>
 							<td>${gList.name} </td>
 							<td>${gList.regDate}</td>
-							<td><a href="/mysite4/guestBook/DeleteForm?no=${gList.no}">[삭제]</a></td>
+							<td><a href="${pageContext.request.contextPath}/guestBook/DeleteForm?no=${gList.no}">[삭제]</a></td>
 						</tr>
 						<tr>
 							<td colspan=4 class="text-left">${gList.content }</td>
