@@ -10,11 +10,71 @@
 			        ,name
 			        ,hit
 			        ,to_char(reg_date, 'YYYY-MM-DD') regDate
+			        ,b.user_no userNo
 			from board b , users u
-			where b.no = u.no
+			where b.user_no = u.no
 			order by no desc
 		]]>
 	</select>
 	
-
+	<select id="boardSearch" resultType="BoardVo" parameterType="String">
+		<![CDATA[
+			select  b.no no
+			        ,title
+			        ,name
+			        ,hit
+			        ,to_char(reg_date, 'YYYY-MM-DD') regDate
+			        ,b.user_no userNo
+			from board b , users u
+			where b.user_no = u.no
+			and title like #{title}
+			order by no desc
+		]]>
+	</select>
+	
+	<insert id="BoardWrite" parameterType="BoardVo">
+		<![CDATA[
+			insert into board
+			values(SEQ_BOARD_NO.nextval,#{title},#{content},0,sysdate,#{userNo})			
+		]]>
+	</insert>
+	
+	<select id="getBoard" resultType="BoardVo" parameterType="int">
+		<![CDATA[
+			select  b.no no
+			        ,name
+			        ,hit
+			        ,reg_date regDate
+			        ,title
+			        ,content
+			        ,user_no userNo
+			from board b, users u 
+			where b.user_no = u.no
+			and b.no = #{no} 	
+		]]>
+	</select>
+	
+	<update id="boardModify" parameterType="BoardVo">
+		<![CDATA[
+			update board
+			set title = #{title}
+			    ,content = #{content}
+			where no = #{no}
+		]]>
+	</update>
+	
+	<update id="hitUpdate" parameterType="int">
+		<![CDATA[
+			update board
+			set hit = hit+1
+			where no = #{no}	
+		]]>
+	</update>
+	
+	<delete id="boardDelete" parameterType="int">
+		<![CDATA[
+			delete board
+			where no = #{no}	
+		]]>
+	</delete>
 </mapper>

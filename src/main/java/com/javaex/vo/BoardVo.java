@@ -9,20 +9,25 @@ public class BoardVo {
 	private String content;
 	private int hit;
 	private String regDate;
+	private int userNo;
 	private String name;
+	
 	//생성자
 	public BoardVo() {
 		super();
 	}
-	public BoardVo(int no, String title, String content, int hit, String regDate, String name) {
+	
+	public BoardVo(int no, String title, String content, int hit, String regDate, int userNo, String name) {
 		super();
 		this.no = no;
 		this.title = title;
 		this.content = content;
 		this.hit = hit;
 		this.regDate = regDate;
+		this.userNo = userNo;
 		this.name = name;
 	}
+
 	//메소드 gs
 	public int getNo() {
 		return no;
@@ -60,11 +65,19 @@ public class BoardVo {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public int getUserNo() {
+		return userNo;
+	}
+
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
+	}
 	//메소드 일반
+
 	@Override
 	public String toString() {
 		return "BoardVo [no=" + no + ", title=" + title + ", content=" + content + ", hit=" + hit + ", regDate="
-				+ regDate + ", name=" + name + "]";
+				+ regDate + ", userNo=" + userNo + ", name=" + name + "]";
 	}
 	
 	
