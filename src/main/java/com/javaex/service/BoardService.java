@@ -30,6 +30,16 @@ public class BoardService {
 		
 		return count;
 	}
+	//리드
+	public BoardVo read(int no) {
+		
+		boardDao.hitUpdate(no);
+		
+		BoardVo count = boardDao.getBoard(no);
+		
+		return count;
+		
+	}
 	
 	//한명 가져오기
 	public BoardVo getBoard(int no) {
@@ -45,14 +55,7 @@ public class BoardService {
 		
 		return count;
 	}
-	//조회수
-	public int hitUpdate(int no) {
-		System.out.println("BoardService > hitUpdate");
-		int count = boardDao.hitUpdate(no);
-		System.out.println(count+"건 변경됨");
-		
-		return count;
-	}
+
 	//검색
 	public List<BoardVo> searchList(String title) {
 		System.out.println("BoardService > searchList");

@@ -71,8 +71,8 @@ public class BoardController {
 	public String read(@RequestParam("no") int no ,Model model) {
 		System.out.println("BoardController > read");
 		
-		boardService.hitUpdate(no);
-		BoardVo bVo = boardService.getBoard(no);
+		
+		BoardVo bVo = boardService.read(no);
 		
 		System.out.println(bVo);
 		model.addAttribute("bVo" , bVo);
