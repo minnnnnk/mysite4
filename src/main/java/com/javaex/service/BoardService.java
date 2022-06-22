@@ -59,6 +59,13 @@ public class BoardService {
 	//검색
 	public List<BoardVo> searchList(String title) {
 		System.out.println("BoardService > searchList");
+		
+		if(title == null) {
+			title = "";
+		}
+		
+		title = "%" + title + "%";
+		
 		List<BoardVo> bList = boardDao.searchList(title);
 		
 		return bList;

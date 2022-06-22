@@ -34,12 +34,7 @@ public class BoardController {
 	@RequestMapping(value="/search" ,method= {RequestMethod.GET,RequestMethod.POST})
 	public String search(String title, Model model) {
 		System.out.println("BoardController > search");
-		
-		if(title == null) {
-			title = "";
-		}
-		
-		title = "%" + title + "%";
+	
 		
 		List<BoardVo> bList = boardService.searchList(title);
 		System.out.println(bList);
