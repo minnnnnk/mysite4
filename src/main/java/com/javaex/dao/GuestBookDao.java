@@ -19,7 +19,7 @@ public class GuestBookDao {
 		System.out.println("guestBookDao > List");
 		
 		List<GuestBookVo> gList = sqlSession.selectList("guestbook.getGuestBookList"); /* 두개필없 */
-		
+		System.out.println(gList);
 		return gList;
 	}
 	

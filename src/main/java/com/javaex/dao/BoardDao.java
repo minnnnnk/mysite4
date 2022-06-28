@@ -66,4 +66,10 @@ public class BoardDao {
 		return count;
 	}
 	
+	public List<BoardVo> List3(String title){
+		System.out.println("boardDao > List3");
+		List<BoardVo> bList = sqlSession.selectList("board.selectList3", title);
+		
+		return bList;
+	}
 }

@@ -30,6 +30,18 @@ public class BoardController {
 		
 		return "/board/list";
 	}
+	
+	@RequestMapping(value="/list3", method= {RequestMethod.GET,RequestMethod.POST})
+	public String list3(Model model, @RequestParam(value="keyword",required = false, defaultValue = "") String title) {
+		System.out.println("BoardCotroller > List3");
+		List<BoardVo> bList = boardService.List3(title);
+		
+		System.out.println(bList);
+		
+		model.addAttribute("bList",bList);
+		
+		return "/board/list";
+	}
 	//검색
 	@RequestMapping(value="/search" ,method= {RequestMethod.GET,RequestMethod.POST})
 	public String search(String title, Model model) {

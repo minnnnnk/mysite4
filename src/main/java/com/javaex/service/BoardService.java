@@ -70,6 +70,13 @@ public class BoardService {
 		
 		return bList;
 	}
+	//검색
+	public List<BoardVo> List3(String title) {
+		System.out.println("BoardService > List3");
+		
+		List<BoardVo> bList = boardDao.List3(title);
+		return bList;
+	}
 	//삭제
 	public int delete(int no) {
 		System.out.println("BoardService> delete");
