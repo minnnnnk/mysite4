@@ -27,8 +27,8 @@
 			<div id="aside">
 				<h2>방명록</h2>
 				<ul>
-					<li>일반방명록</li>
-					<li>ajax방명록</li>
+					<li><a href="${pageContext.request.contextPath}/guestBook/List">일반방명록</a></li>
+					<li><a href="${pageContext.request.contextPath}/api/guestbook/addList">ajax방명록</a></li>
 				</ul>
 			</div>
 			<!-- //aside -->
@@ -73,7 +73,6 @@
 						</table>
 					
 						
-					<button id="btnTest" class="btn btn-primary">모달창</button>	
 					
 					<div id="listArea">
 					
@@ -131,6 +130,7 @@ $(document).ready(function(){
 	fetchList();
 });
 
+
 /* 저장버튼을 클릭했을때 */
 $("#submit").on("click",function(){
 console.log("저장버튼 클릭");
@@ -179,7 +179,7 @@ $("#btnTest").on("click",function(){
 	console.log("테스트버튼 클릭")
 	
 	//모달창 띄우기
-	$("#delModal").modal();
+	$("#delModal").modal("show");
 })
 
  
