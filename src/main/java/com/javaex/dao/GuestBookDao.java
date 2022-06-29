@@ -45,4 +45,20 @@ public class GuestBookDao {
 		return gVo;
 	}
 	
+	//방명록 저장 ajax
+    public int InsertGuest(GuestBookVo gVo) {
+      System.out.println("GuestDao>InsertGuest");
+      
+      int count = sqlSession.insert("guestbook.insertSelectKey", gVo);
+      return count;
+   }
+    
+    //방명록 삭제 ajax
+	public int remove(GuestBookVo guestbookVo) {
+		System.out.println("guestBookDao > delete");
+		
+		int count = sqlSession.delete("guestbook.guestBookDelete", guestbookVo);
+		
+		return count;
+	}
 }

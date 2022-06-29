@@ -1,45 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${pageContext.request.contextPath}//assets/css/mysite.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath}//assets/css/guestbook.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/guestbook.css" rel="stylesheet" type="text/css">
 
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.12.4.js"></script>
 </head>
 
 <body>
 	<div id="wrap">
 
-		<div id="header" class="clearfix">
-			<h1>
-				<a href="">MySite</a>
-			</h1>
-
-			<!-- 
-			<ul>
-				<li>황일영 님 안녕하세요^^</li>
-				<li><a href="" class="btn_s">로그아웃</a></li>
-				<li><a href="" class="btn_s">회원정보수정</a></li>
-			</ul>
-			-->	
-			<ul>
-				<li><a href="" class="btn_s">로그인</a></li>
-				<li><a href="" class="btn_s">회원가입</a></li>
-			</ul>
-			
-		</div>
+		<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
 		<!-- //header -->
 
-		<div id="nav">
-			<ul class="clearfix">
-				<li><a href="">입사지원서</a></li>
-				<li><a href="">게시판</a></li>
-				<li><a href="">갤러리</a></li>
-				<li><a href="">방명록</a></li>
-			</ul>
-		</div>
+	
+	
 		<!-- //nav -->
 
 		<div id="container" class="clearfix">
@@ -68,7 +47,6 @@
 				<!-- //content-head -->
 	
 				<div id="guestbook">
-					<form action="" method="">
 						<table id="guestDelete">
 							<colgroup>
 								<col style="width: 10%;">
@@ -78,15 +56,12 @@
 							</colgroup>
 							<tr>
 								<td>비밀번호</td>
-								<td><input type="password" name="pass"></td>
-								<td class="text-left"><button type="submit">삭제</button></td>
-								<td><a href="/guestbook2/gbc">[메인으로 돌아가기]</a></td>
+								<td><input type="password" name="password" value=""></td>
+								<td class="text-left"><button type="submit" id="btnDelete">삭제</button></td>
+								<td><a href="${pageContext.request.contextPath}/api/guestbook/addList">[메인으로 돌아가기]</a></td>
 							</tr>
 						</table>
-						<input type='hidden' name="" value="">
-						<input type='hidden' name="" value="">
-					</form>
-					
+						<input type ="hidden" name="no" value="${gVo.no}">
 				</div>
 				<!-- //guestbook -->
 			</div>
@@ -95,14 +70,44 @@
 		</div>
 		<!-- //container  -->
 		
-		<div id="footer">
-			Copyright ⓒ 2020 황일영. All right reserved
-		</div>
+			<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 		<!-- //footer -->
 
 	</div>
 	<!-- //wrap -->
 
 </body>
+<script type="text/javascript">
+$("#btnDelete").on("click",function(){
+	
+	var password = $("[name='password']").val();
+	var no = $("[name='no']").val();
+	
+	console.log(password);
+	console.log(no);
+	
+	var GuestBookVo = {
+		password:password,
+		no:no
+	}
+	$.ajax({
+		
+		url : "${pageContext.request.contextPath }/api/guestbook/delete",		
+		type : "post",
+		//contentType : "application/json",
+		data : GuestBookVo,
 
+		dataType : "json",
+		success : function(gVo){
+			/*성공시 처리해야될 코드 작성*/
+			console.log(gVo);
+		},
+		error : function(XHR, status, error) {
+			console.error(status + " : " + error);
+		}
+	});
+
+});
+
+</script>
 </html>

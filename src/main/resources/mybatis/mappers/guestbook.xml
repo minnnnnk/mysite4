@@ -12,6 +12,7 @@
         			,content
         			,to_char(reg_date, 'YYYY-MM-DD HH24:MI:SS') regDate
 			from guestbook
+			order by no desc
 		]]>
 	</select>
 		
@@ -20,10 +21,26 @@
 		values(SEQ_GUESTBOOK_NO.nextval, #{name}, #{password}, #{content}, sysdate)
 	</insert>
 	
+	<!-- 방명록저장 ajax -->
+    <insert id="insertSelectKey" parameterType="com.javaex.vo.GuestBookVo">
+    	
+    	<selectKey keyProperty="no" resultType="int" order="BEFORE">
+    		select seq_guestbook_no.nextval from dual
+    	</selectKey>
+    	
+       <![CDATA[
+          insert into guestbook 
+          values (#{no},#{name},#{password}, #{content}, sysdate)
+       ]]>
+    </insert>
+    
+    
 	<delete id="guestBookDelete" parameterType="com.javaex.vo.GuestBookVo">
+		<![CDATA[
 			DELETE from guestbook
 			where no = #{no}
 			and password = #{password}
+		]]>	
 	</delete>
 	
 	<select id="getGuest" resultType="com.javaex.vo.GuestBookVo">
@@ -37,4 +54,6 @@
 			where no = #{no}
 		]]>
 	</select>
+	
+	
 </mapper>
