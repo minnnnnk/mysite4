@@ -130,8 +130,51 @@ $(document).ready(function(){
 	fetchList();
 });
 
+/* 저장버튼을 클릭했을때 Json*/
+$("#submit").on("click",function(){
+console.log("저장버튼 클릭");
 
-/* 저장버튼을 클릭했을때 */
+	//데이터 수집
+	var name = $("[name='name']").val();
+	var password = $("[name='password']").val();
+	var content = $("[name='content']").val();
+	
+	//데이터를 담아줌
+	var GuestVo = {
+		name : name,
+		password:password,
+		content:content
+	};
+	
+	
+	$.ajax({
+		
+		url : "${pageContext.request.contextPath}/api/guestbook/add2",		
+		type : "post",
+		contentType : "application/json",
+		data : JSON.stringify(GuestVo), // 외우기
+		
+		dataType : "json",
+		success : function(gVo){
+			
+			//1개데이터 추가 그리기
+			render(gVo,"up");
+			
+			$("[name='name']").val("");
+			$("[name='password']").val("");
+			$("[name='content']").val("");
+			
+		},
+		error : function(XHR, status, error) {
+			console.error(status + " : " + error);
+		}
+	});
+	
+	
+});
+
+
+/* 저장버튼을 클릭했을때 jquery
 $("#submit").on("click",function(){
 console.log("저장버튼 클릭");
 
@@ -156,7 +199,7 @@ console.log("저장버튼 클릭");
 		
 		dataType : "json",
 		success : function(gVo){
-			/*성공시 처리해야될 코드 작성*/
+			/*성공시 처리해야될 코드 작성
 			console.log(gVo);
 			render(gVo, "up");
 			
@@ -172,6 +215,8 @@ console.log("저장버튼 클릭");
 
 	
 });
+*/
+
 
 /* 테스트버튼을 눌렀을떄
   

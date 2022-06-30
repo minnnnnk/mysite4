@@ -43,7 +43,7 @@
 		]]>	
 	</delete>
 	
-	<select id="getGuest" resultType="com.javaex.vo.GuestBookVo">
+	<select id="getGuest" resultType="com.javaex.vo.GuestBookVo" parameterType="int">
 		<![CDATA[
 			select  no
         			,name

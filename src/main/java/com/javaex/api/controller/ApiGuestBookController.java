@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -50,6 +51,20 @@ public class ApiGuestBookController {
 		
 		return gVo;
 	}
+	
+	//벙명록 저장2
+	@ResponseBody
+	@RequestMapping(value="/api/guestbook/add2",method= {RequestMethod.GET,RequestMethod.POST})
+	public GuestBookVo add2(@RequestBody GuestBookVo guestbookVo) {
+		System.out.println("apiGuestBookController > add2");
+		
+		GuestBookVo gVo =guestbookservice.addGuest(guestbookVo);
+		
+		System.out.println(gVo);
+		
+		return gVo;
+	}
+	
 	
 	//삭제폼
 	@RequestMapping(value="/api/guestbook/deleteForm",method= {RequestMethod.GET,RequestMethod.POST})
