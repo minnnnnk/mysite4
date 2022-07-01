@@ -1,5 +1,7 @@
 package com.javaex.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,5 +44,21 @@ public class UserService {
 		int count = userDao.userUpdate(userVo);
 		System.out.println(count + "건 변경되었습니다");
 		return count;
+	}
+	
+	public boolean userCheck(String id){
+		System.out.println("userService > userchekc");
+		List<String> idList = userDao.userCheck();
+		
+		
+		for(int i = 0; i<idList.size(); i++) {
+			String uId= idList.get(i);
+			if(id.equals(uId)) {
+				return true;
+			}
+		}
+		
+		
+		return false;
 	}
 }

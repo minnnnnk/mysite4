@@ -4,7 +4,14 @@
 
 	<!-- 쿼리문 -->
 
-	
+	<select id="userIdCheck" resultType="String" >
+		<![CDATA[
+			select id
+			from users
+		]]>
+		
+		
+	</select>
 
 	<select id="loginUser" resultType="UserVo" parameterType="UserVo">
 		<![CDATA[

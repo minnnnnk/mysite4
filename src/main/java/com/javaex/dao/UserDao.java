@@ -1,5 +1,7 @@
 package com.javaex.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -45,6 +47,13 @@ public class UserDao {
 		int count = sqlsession.update("user.userUpdate", userVo);
 		
 		return count;
+	}
+	
+	public List<String> userCheck(){
+		System.out.println("UserDao > userCheck");
+		List<String> userId =sqlsession.selectList("user.userIdCheck");
+		
+		return userId;
 	}
 	
 }

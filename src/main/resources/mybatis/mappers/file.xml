@@ -4,7 +4,7 @@
 
 	<!-- 쿼리문 -->
 	
-	<insert id="fileInsert" parameterType="com.javaex.vo.FileVo">
+	<insert id="fileInsert" parameterType="FileVo">
 		<![CDATA[
 			INSERT INTO fileupload
 			values(SEQ_fileupload_no.nextval,#{orgName},#{saveName},#{filePath},#{fileSize})

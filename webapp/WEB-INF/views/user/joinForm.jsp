@@ -8,6 +8,7 @@
 <link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/assets/css/user.css" rel="stylesheet" type="text/css">
 
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.12.4.js"></script>
 </head>
 
 <body>
@@ -43,15 +44,20 @@
 	
 				<div id="user">
 					<div id="joinForm">
-						<form action="${pageContext.request.contextPath}/user/join" method="get">
+						<form id ="join-form" action="${pageContext.request.contextPath}/user/join" method="get">
 	
 							<!-- 아이디 -->
 							<div class="form-group">
 								<label class="form-text" for="input-uid">아이디</label> 
 								<input type="text" id="input-uid" name="id" value="" placeholder="아이디를 입력하세요">
-								<button type="button" id="">중복체크</button>
+								<button type="button" id="btnCheck">중복체크</button> <br>
+								
 							</div>
-	
+							
+							<div id="divCheck">
+							
+							</div>
+							
 							<!-- 비밀번호 -->
 							<div class="form-group">
 								<label class="form-text" for="input-pass">패스워드</label> 
@@ -107,4 +113,64 @@
 
 </body>
 
+<script type="text/javascript">
+
+
+$("#btnCheck").on("click",function(){
+	console.log("체크버튼 클릭");
+	
+	var id = $("#input-uid").val();
+	
+	console.log(id);
+	
+	
+	$.ajax({
+		url : "${pageContext.request.contextPath}/api/user/check",
+		type : "post",
+		contentType : "application/json",
+		data : JSON.stringify(id),
+		dataType : "json",
+		success : function(result){
+			console.log(result);
+			if(result == true){
+				$("#divCheck").html("아이디가 중복되었습니다.");			
+			}
+		},
+		error : function(XHR, status, error) {
+		console.error(status + " : " + error);
+		}
+	});
+	
+})
+
+
+
+$("#join-form").on("submit",function(){
+	console.log("회원가입 버튼 클릭");
+	
+	
+	
+	var id = $("#input-uid").val();
+	var password = $("#input-pass").val();
+	
+	if(id == "" || id == null){
+		alert("아이디를 입력해 주세요");
+		return false;
+	}
+	/*
+	if(password == "" || password == null){
+		alert("패스워드를 입력해 주세요");
+		return false;
+	}
+	*/
+	if(password.length < 8){
+		alert("패스워드를 입력해 주세요");
+		return false;
+	}
+	
+	
+	
+	return true;
+})
+</script>
 </html>
