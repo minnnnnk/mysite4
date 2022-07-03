@@ -24,10 +24,11 @@ public class GalleryController {
 	
 	
 	@RequestMapping(value="/list", method= {RequestMethod.GET,RequestMethod.POST})
-	public String galleryList(Model model, int no) {
+	public String galleryList(Model model) {
 		System.out.println("GalleryController > galleryList ");
 		
-		List<GalleryVo> gVo = galleryService.galleryList(no);
+		List<GalleryVo> gVo = galleryService.galleryList();
+		
 		
 		model.addAttribute("gVo", gVo);
 		
@@ -44,7 +45,7 @@ public class GalleryController {
 		return "redirect:/gallery/list";
 	}
 	
-
+	
 	
 	
 	

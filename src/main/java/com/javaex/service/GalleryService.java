@@ -22,13 +22,11 @@ public class GalleryService {
 	private GalleryDao galleryDao;
 	
 	//리스트
-	public List<GalleryVo> galleryList(int no){
+	public List<GalleryVo> galleryList(){
 		System.out.println("GalleryService > galleryList");
 		
 		List<GalleryVo> gVo = galleryDao.galleryList();
 		
-		GalleryVo galVo = gVo.get(no);
-		System.out.println(galVo);
 		
 		return gVo;
 	}
@@ -87,11 +85,20 @@ public class GalleryService {
 		}
 	
 	
-		public GalleryVo getImage(int no) {
+		public GalleryVo getImage(String saveName) {
 			
-			GalleryVo gVo =galleryDao.getImage(no);
+			GalleryVo gVo =galleryDao.getImage(saveName);
 			
 			return gVo;
 		}
 		
-}
+		public int delete(int no) {
+			
+			
+			int count =galleryDao.galleryDelete(no);
+			
+			System.out.println(count+"건 삭제되엇습니다");
+			
+			return count;
+		}
+}	

@@ -9,7 +9,6 @@
 			select  g.no no
         			,g.user_no userNo
 			        ,content
-			        ,filepath
 			        ,orgName
 			        ,saveName
 			        ,fileSize
@@ -27,7 +26,7 @@
 			        ,saveName
 			from gallery
 			where saveName = #{saveName}
-		]]>	
+		]]>
 	</select>
 
 	<insert id="galleryInsert" parameterType="GalleryVo">
@@ -36,4 +35,12 @@
 			values(seq_gallery_no.nextval,#{userNo},#{content},#{filePath},#{orgName},#{saveName},#{fileSize})
 		]]>
 	</insert>	
+	
+	<delete id="galleryDelete" parameterType="int">
+		<![CDATA[
+			delete from gallery
+			where no = #{no}
+		]]>
+		
+	</delete>	
 </mapper>

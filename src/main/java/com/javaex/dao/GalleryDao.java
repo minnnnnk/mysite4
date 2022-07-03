@@ -30,10 +30,17 @@ public class GalleryDao {
 		return count;
 	}
 	
-	public GalleryVo getImage(int no) {
+	public GalleryVo getImage(String saveName) {
 		
-		GalleryVo gVo = sqlSession.selectOne("gallery.getImage", no);
+		GalleryVo gVo = sqlSession.selectOne("gallery.getImage", saveName);
 		
 		return gVo;
+	}
+	
+	public int galleryDelete(int no) {
+		
+		int count = sqlSession.delete("gallery.galleryDelete", no);
+		
+		return count;
 	}
 }

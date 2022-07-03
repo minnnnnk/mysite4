@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javaex.service.GalleryService;
@@ -19,14 +18,26 @@ public class ApiGalleryController {
 	private GalleryService galleryService;
 	
 	@ResponseBody
-	@RequestMapping(value="/api/gallery/read",method= {RequestMethod.GET,RequestMethod.POST})
-	public GalleryVo read2(Model model, @RequestBody int no) {
-		System.out.println("APiGalleryController > read ");
+	@RequestMapping(value="/api/gallery/read2",method= {RequestMethod.GET,RequestMethod.POST})
+	public GalleryVo read2(@RequestBody String saveName) {
+		System.out.println("APiGalleryController > read2 ");
 		
-		GalleryVo gVo = galleryService.getImage(no);
+		GalleryVo gVo = galleryService.getImage(saveName);
+		
 		
 		System.out.println(gVo);
 		
 		return gVo;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/api/gallery/delete",method= {RequestMethod.GET,RequestMethod.POST})
+	public int delete(@RequestBody int no) {
+		
+		galleryService.delete(no);
+		
+		
+		return no;
+	}
+	
 }	

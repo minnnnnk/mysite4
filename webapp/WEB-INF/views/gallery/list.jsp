@@ -58,11 +58,11 @@
 						
 						<!-- 이미지반복영역 -->
 						<c:forEach items="${gVo}" var="gList" varStatus="i">
-							<li>
-								<div class="view" >
-									<img class="imgItem" id="Ig${gList.no}" src="${pageContext.request.contextPath}/upload/${gList.saveName}">
+							<li id="v${gList.no}">
+								<div class="view">
+									<img class="imgItem" src="${pageContext.request.contextPath}/upload/${gList.saveName}">
 									<div class="imgWriter">작성자: <strong>${gList.name}</strong></div>
-									<input type="text" id="viewNo" name="no" value="${gList.no}">
+									<input type="hidden" id="viewNo" name="no" value="${gList.no}">
 								</div>
 							</li>
 						</c:forEach>
@@ -104,12 +104,13 @@
 						<div class="form-group">
 							<label class="form-text">이미지선택</label>
 							<input id="file" type="file" name="file" value="" >
+							<input type="hidden" name="userNo" value="${authUser.no}">
+							
 						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="submit" class="btn" id="btnUpload">등록</button>
 					</div>
-					<input type="hidden" name="userNo" value="${authUser.no}">
 				</form>
 				
 				
@@ -130,17 +131,18 @@
 				<div class="modal-body">
 					
 					<div class="formgroup" >
-						<img id="viewModelImg" src ="${pageContext.request.contextPath}/upload/${galleryVo.saveName}"> <!-- ajax로 처리 : 이미지출력 위치-->
+						<img id="viewModelImg" src =""> <!-- ajax로 처리 : 이미지출력 위치-->
 					</div>
 					
 					<div class="formgroup">
 						<p id="viewModelContent"></p>
+						<input type="hidden" id="viewNum" name="no" value="">
 					</div>
 					
 				</div>
 					<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-					<c:if test="${authUser.no == galleryVo.userNo}"><button type="button" class="btn btn-danger" id="btnDel">삭제</button></c:if>
+					<button type="button" class="btn btn-danger" id="btnDel">삭제</button>
 				</div>
 				
 				
@@ -154,6 +156,7 @@
 
 <script type="text/javascript">
 
+//업로드 버튼
 $("#btnImgUpload").on("click",function(){
 	console.log("등록 모달창 클릭");
 	
@@ -161,27 +164,55 @@ $("#btnImgUpload").on("click",function(){
 })
 
 
-
+//사진 클릭했을때
 $(".view").on("click",".imgItem",function(){
 	console.log("뷰 모달창 클릭");
 	
 	
+	//클릭한 친구 불러오기
 	var $this = $(this);
 	console.log($this);
 	
-	var id = $this.attr("id");
-	console.log(id);
+	//이미지 불러와서
+	var img = $this.attr("src");
+	var Path = img.split("/");
+	
+	//배열에 찾아서 saveName으로 보내기
+	var saveName = Path[3]
 	
 	
 	$.ajax({
 		url : "${pageContext.request.contextPath}/api/gallery/read2",
 		type : "post",
 		contentType : "application/json",
-		data : JSON.stringify(id),
+		data : JSON.stringify(saveName),
 		dataType : "json",
-		success : function(result){
-			console.log(result);
+		success : function(gVo){
+			console.log(gVo);
+			
+			//숫자 담아주기
+			$("#viewNum").val(gVo.no);
+			
+			//세션 넘버 가져오기
+			var userNo = "${authUser.no}";
+			
+			//딜리트버튼 숨기기
+			if(userNo != gVo.userNo){
+				$("#btnDel").hide();
+			}else if(userNo == gVo.userNo) {
+				$("#btnDel").show();
+			}
+			
+			//사진 담아주기
+			$("#viewModelImg").attr("src", "${pageContext.request.contextPath}/upload/"+gVo.saveName);
+			
+			//컨텐츠 담아주기
+			$("#viewModelContent").text(gVo.content);
+			
+			//창띄우기
 			$("#viewModal").modal("show");	
+			
+			
 		},
 		error : function(XHR, status, error) {
 		console.error(status + " : " + error);
@@ -189,6 +220,39 @@ $(".view").on("click",".imgItem",function(){
 	});
 	
 });
+
+$("#btnDel").on("click",function(){
+	console.log("딜리트 버튼 클릭");
+	
+	//no값 가져오기
+	var no = $("#viewNum").val();
+	
+	$.ajax({
+		url : "${pageContext.request.contextPath }/api/gallery/delete",		
+		type : "post",
+		contentType : "application/json",
+		data : JSON.stringify(no),
+
+		dataType : "json",
+		success : function(no){
+			/*성공시 처리해야될 코드 작성*/
+			console.log("#v"+no);
+			
+			//배열삭제
+			$("#v"+no).remove();
+			
+			
+			//모달창닫기
+			$("#viewModal").modal("hide");	
+		},
+		error : function(XHR, status, error) {
+			console.error(status + " : " + error);
+		}
+	});
+	
+	
+	
+})
 
 </script>
 
