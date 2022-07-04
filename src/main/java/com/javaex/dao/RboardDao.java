@@ -64,4 +64,11 @@ public class RboardDao {
 		
 		return count;
 	}
+	
+	public int orderNo(RboardVo rboardVo) {
+		
+		int count = sqlSession.update("rboard.orderNoUpdate", rboardVo);
+		
+		return count;
+	}
 }

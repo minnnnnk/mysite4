@@ -20,6 +20,7 @@ public class RboardController {
 	@Autowired
 	private RboardService rboardService;
 	
+	//리스트
 	@RequestMapping(value="/list", method= {RequestMethod.GET,RequestMethod.POST})
 	public String list(Model model) {
 		System.out.println("RboardController > list");
@@ -30,7 +31,7 @@ public class RboardController {
 		
 		return "/rboard/list";
 	}
-	
+	//읽기
 	@RequestMapping(value="/read",method= {RequestMethod.GET,RequestMethod.POST})
 	public String read(Model model, @RequestParam("no") int no) {
 		System.out.println("RboardController > read");
@@ -42,6 +43,7 @@ public class RboardController {
 		return "/rboard/read";
 	}
 	
+	//등록폼
 	@RequestMapping(value="/writeForm",method= {RequestMethod.GET,RequestMethod.POST})
 	public String writeForm() {
 		System.out.println("RboardController > wrtieForm");
@@ -49,6 +51,7 @@ public class RboardController {
 		return "/rboard/writeForm";
 	}
 	
+	//등록
 	@RequestMapping(value="/write",method= {RequestMethod.GET,RequestMethod.POST})
 	public String write(@ModelAttribute RboardVo rboardVo) {
 		System.out.println("RboardController > write");
@@ -56,6 +59,7 @@ public class RboardController {
 		return "redirect:/rboard/list";
 	}
 	
+	//댓글등록폼
 	@RequestMapping(value="/commentForm" , method= {RequestMethod.GET,RequestMethod.POST})
 	public String commentForm(Model model,@RequestParam("no") int no) {
 		System.out.println("RboardController > commentForm");
@@ -66,6 +70,8 @@ public class RboardController {
 		
 		return "/rboard/commentForm";
 	}
+	
+	//댓글등록
 	@RequestMapping(value="/comment" , method= {RequestMethod.GET,RequestMethod.POST})
 	public String comment(@ModelAttribute RboardVo rboardVo) {
 		System.out.println("RboardController > comment");
@@ -75,7 +81,7 @@ public class RboardController {
 		
 		return "redirect:/rboard/list";
 	}
-	
+	//삭제
 	@RequestMapping(value="/delete", method= {RequestMethod.GET,RequestMethod.POST})
 	public String delete(@RequestParam("no") int no) {
 		System.out.println("RboardController > delete");
@@ -84,7 +90,7 @@ public class RboardController {
 		
 		return "redirect:/rboard/list";
 	}
-	
+	//수정폼
 	@RequestMapping(value="/modifyForm",method= {RequestMethod.GET,RequestMethod.POST})
 	public String modifyForm(Model model, @RequestParam("no") int no) {
 		System.out.println("RboardController > modifyForm");
@@ -95,6 +101,7 @@ public class RboardController {
 		return "/rboard/modifyForm";
 	}
 	
+	//수정
 	@RequestMapping(value="/modify",method= {RequestMethod.GET,RequestMethod.POST})
 	public String modify(@ModelAttribute RboardVo rboardVo) {
 		System.out.println("RboardController > modify");

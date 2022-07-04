@@ -48,9 +48,19 @@
 	<insert id="commentWrite" parameterType="RboardVo">
 		<![CDATA[
 			insert into rboard
-			values(seq_rboard_no.nextval,#{title},#{content},0,sysdate,#{userNo},#{groupNo},#{orderNo}+1,#{depth}+1)
+			values(seq_rboard_no.nextval,#{title},#{content},0,sysdate,#{userNo},#{groupNo},#{orderNo},#{depth}+1)
 		]]>
 	</insert>
+	
+	<update id="orderNoUpdate" parameterType="RboardVo">
+		<![CDATA[
+			update rboard
+			set order_no = order_no + 1
+			where group_no = #{groupNo}
+			and order_no >= #{orderNo}
+			or depth > #{depth}
+		]]>
+	</update>
 	
 	<update id="hitUpdate" parameterType="int">
 		<![CDATA[

@@ -46,6 +46,7 @@
 					<div id="writeForm">
 						<form action="${pageContext.request.contextPath}/rboard/write" method="get">
 							<input type="text" name="userNo" value="${authUser.no}">
+							
 							<!-- 제목 -->
 							<div class="form-group">
 								<label class="form-text" for="txt-title">제목</label> <input type="text" id="txt-title" name="title" value="" placeholder="제목을 입력해 주세요">
