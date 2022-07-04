@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css">
+
 
 </head>
 
@@ -16,9 +17,6 @@
 	<div id="wrap">
 
 		<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
-		<!-- //header +nav -->
-
-		
 
 		<div id="container" class="clearfix">
 			<div id="aside">
@@ -33,7 +31,7 @@
 			<div id="content">
 
 				<div id="content-head">
-					<h3>게시판</h3>
+					<h3>R게시판</h3>	
 					<div id="location">
 						<ul>
 							<li>홈</li>
@@ -47,36 +45,34 @@
 
 				<div id="board">
 					<div id="list">
-					
-						<form action="${pageContext.request.contextPath}/board/search" method="get">
+						<form action="" method="">
 							<div class="form-group text-right">
-								<input type="text" name = "title">
+								<input type="text">
 								<button type="submit" id=btn_search>검색</button>
 							</div>
 						</form>
-						
 						<table>
 							<thead>
 								<tr>
 									<th>번호</th>
 									<th>제목</th>
-									<th>글쓴이</th>
-									<th>조회수</th>
-									<th>작성일</th>
+									<th>group_no</th>
+									<th>order_no</th>
+									<th>depth</th>
 									<th>관리</th>
 								</tr>
 							</thead>
 							<tbody>
-							<c:forEach items="${bList}" var="bList" varStatus="status">
-								<tr>
-									<td>${bList.no}</td>
-									<td class="text-left"><a href="${pageContext.request.contextPath}/board/read?no=${bList.no}">${bList.title }</a></td>
-									<td>${bList.name }</td>
-									<td>${bList.hit }</td>
-									<td>${bList.regDate }</td>
-									<c:if test="${authUser.no == bList.userNo}"><td><a href="${pageContext.request.contextPath}/board/delete?no=${bList.no}">[삭제]</a></td></c:if>
-								</tr>
-							</c:forEach>	
+								<c:forEach items="${rbList}" var="rbList" varStatus="">
+									<tr>
+										<td>${rbList.no}</td>
+										<td class="text-left"><a href="${pageContext.request.contextPath}/rboard/read?no=${rbList.no}"><c:if test="${rbList.depth > 0}">&emsp;*${rbList.depth} </c:if>${rbList.content}</a></td>
+										<td>${rbList.groupNo}</td>
+										<td>${rbList.orderNo}</td>
+										<td>${rbList.depth}</td>
+										<c:if test="${authUser.no == rbList.userNo }"><td><a href="${pageContext.request.contextPath}/rboard/delete?no=${rbList.no}">[삭제]</a></td></c:if>	
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 
@@ -99,7 +95,10 @@
 
 							<div class="clear"></div>
 						</div>
-						<c:if test="${authUser.name != null}"><a id="btn_write" href="${pageContext.request.contextPath}/board/writeForm">글쓰기</a></c:if>
+						<c:if test="${authUser.no != null}">
+							<a id="btn_write" href="${pageContext.request.contextPath}/rboard/writeForm">글쓰기</a>
+						</c:if>
+
 					</div>
 					<!-- //list -->
 				</div>
