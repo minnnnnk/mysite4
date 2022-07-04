@@ -17,6 +17,14 @@ public class RboardService {
 	public List<RboardVo> rBoardList(){
 		System.out.println("RboardService > list");
 		List<RboardVo> rList =  rboardDao.rBoardList();
+
+		for(int i = 0; i<rList.size(); i++) {
+			for(int j= 0; j<rList.get(i).getDepth(); j++) {
+				rList.get(i).setTitle("&emsp; " + rList.get(i).getTitle());
+				System.out.println(rList.get(i).getTitle());
+			}
+		}
+		
 		
 		return rList;
 	}

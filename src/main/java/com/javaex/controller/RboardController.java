@@ -24,6 +24,7 @@ public class RboardController {
 	public String list(Model model) {
 		System.out.println("RboardController > list");
 		List<RboardVo> rbList = rboardService.rBoardList();
+		
 		System.out.println(rbList);
 		model.addAttribute("rbList", rbList);
 		

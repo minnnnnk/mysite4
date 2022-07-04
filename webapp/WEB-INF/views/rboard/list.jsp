@@ -66,7 +66,7 @@
 								<c:forEach items="${rbList}" var="rbList" varStatus="">
 									<tr>
 										<td>${rbList.no}</td>
-										<td class="text-left"><a href="${pageContext.request.contextPath}/rboard/read?no=${rbList.no}"><c:if test="${rbList.depth > 0}">&emsp;*${rbList.depth} </c:if>${rbList.content}</a></td>
+										<td class="text-left"><a href="${pageContext.request.contextPath}/rboard/read?no=${rbList.no}">${rbList.title}</a></td>
 										<td>${rbList.groupNo}</td>
 										<td>${rbList.orderNo}</td>
 										<td>${rbList.depth}</td>
