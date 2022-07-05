@@ -16,6 +16,45 @@
 			order by no desc
 		]]>
 	</select>
+	<select id="BoardList4" resultType="BoardVo" parameterType="map"> 
+		<![CDATA[
+			select  ort.rn
+			        ,ort.no
+			        ,ort.title
+			        ,ort.name
+			        ,ort.hit
+			        ,ort.regDate
+			        ,ort.userNo
+			from (select    rownum rn
+			                ,ot.no
+			                ,ot.title
+			                ,ot.name
+			                ,ot.hit
+			                ,ot.regDate
+			                ,ot.userno
+			      from (select   b.no no
+			                    ,title
+			                    ,name
+			                    ,hit
+			                    ,to_char(reg_date, 'YYYY-MM-DD') regDate
+			                    ,b.user_no userNo
+			            from board b , users u
+			            where b.user_no = u.no
+			            order by no desc) ot) ort
+			where rn>= #{startRNum}
+			and rn<= #{endRNum}
+		]]>
+	</select>
+	
+	<!-- 전체글갯수 구하기 -->
+	<select id="selectTotalCnt" resultType="int">
+		<![CDATA[
+			select count(*) count
+			from board b , users u 
+			where b.user_no = u.no
+		]]>
+	</select>
+	
 	
 	<select id="boardSearch" resultType="BoardVo" parameterType="String">
 		<![CDATA[

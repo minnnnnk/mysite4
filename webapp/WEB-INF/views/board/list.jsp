@@ -67,7 +67,7 @@
 								</tr>
 							</thead>
 							<tbody>
-							<c:forEach items="${bList}" var="bList" varStatus="status">
+							<c:forEach items="${pMap.bList}" var="bList" varStatus="status">
 								<tr>
 									<td>${bList.no}</td>
 									<td class="text-left"><a href="${pageContext.request.contextPath}/board/read?no=${bList.no}">${bList.title }</a></td>
@@ -82,21 +82,25 @@
 
 						<div id="paging">
 							<ul>
-								<li><a href="">◀</a></li>
-								<li><a href="">1</a></li>
-								<li><a href="">2</a></li>
-								<li><a href="">3</a></li>
-								<li><a href="">4</a></li>
-								<li class="active"><a href="">5</a></li>
-								<li><a href="">6</a></li>
-								<li><a href="">7</a></li>
-								<li><a href="">8</a></li>
-								<li><a href="">9</a></li>
-								<li><a href="">10</a></li>
-								<li><a href="">▶</a></li>
+								<c:if test="${pMap.prev}">
+									<li><a href="${pageContext.request.contextPath}/board/list4?crtPage=${pMap.startPageBtnNo-1}">◀</a></li>
+								</c:if>
+								
+								<c:forEach begin="${pMap.startPageBtnNo}" end="${pMap.endPageBtnNo}" step="1" var="page">
+									<c:choose>
+										<c:when test="${param.crtPage == page}">
+											<li class="active"><a href="${pageContext.request.contextPath}/board/list4?crtPage=${page}">${page}</a></li>
+										</c:when>
+										<c:otherwise>
+											<li><a href="${pageContext.request.contextPath}/board/list4?crtPage=${page}">${page}</a></li>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+								<c:if test="${pMap.next}">
+									<li><a href="${pageContext.request.contextPath}/board/list4?crtPage=${pMap.endPageBtnNo+1}">▶</a></li>
+								</c:if>
 							</ul>
-
-
+							
 							<div class="clear"></div>
 						</div>
 						<c:if test="${authUser.name != null}"><a id="btn_write" href="${pageContext.request.contextPath}/board/writeForm">글쓰기</a></c:if>
